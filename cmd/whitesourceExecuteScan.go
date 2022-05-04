@@ -427,6 +427,8 @@ func wsScanOptions(config *ScanOptions) *ws.ScanOptions {
 		ProductToken:               config.ProductToken,
 		ProductVersion:             config.Version,
 		ProjectName:                config.ProjectName,
+		ProjectTagKey:              config.ProjectTagKey,
+		ProjectTagValue:            config.ProjectTagValue,
 		BuildDescriptorFile:        config.BuildDescriptorFile,
 		BuildDescriptorExcludeList: config.BuildDescriptorExcludeList,
 		PomPath:                    config.BuildDescriptorFile,

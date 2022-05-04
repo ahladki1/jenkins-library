@@ -12,7 +12,9 @@ type ScanOptions struct {
 	ProductVersion string
 	// ProjectName is an optional name for an "aggregator" project.
 	// All scanned maven modules will be reflected in the aggregate project.
-	ProjectName string
+	ProjectName     string
+	ProjectTagKey   string
+	ProjectTagValue string
 
 	BuildDescriptorFile        string
 	BuildDescriptorExcludeList []string

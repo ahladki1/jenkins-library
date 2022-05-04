@@ -129,6 +129,8 @@ func (c *ConfigOptions) addGeneralDefaults(config *ScanOptions, utils Utils, pro
 		{Name: "productName", Value: config.ProductName, Force: true},
 		{Name: "productVersion", Value: config.ProductVersion, Force: true},
 		{Name: "projectName", Value: projectName, Force: true},
+		{Name: "projectTagKey", Value: config.ProjectTagKey, Force: true},
+		{Name: "projectTagValue", Value: config.ProjectTagValue, Force: true},
 		{Name: "projectVersion", Value: config.ProductVersion, Force: true},
 		{Name: "productToken", Value: config.ProductToken, OmitIfPresent: "projectToken", Force: true},
 		{Name: "userKey", Value: config.UserToken, Force: true},

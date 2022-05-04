@@ -201,6 +201,8 @@ type Request struct {
 	UserKey              string      `json:"userKey,omitempty"`
 	ProductToken         string      `json:"productToken,omitempty"`
 	ProductName          string      `json:"productName,omitempty"`
+	ProjectTagKey        string      `json:"tagKey,omitempty"`
+	ProjectTagValue      string      `json:"tagValue,omitempty"`
 	ProjectToken         string      `json:"projectToken,omitempty"`
 	OrgToken             string      `json:"orgToken,omitempty"`
 	Format               string      `json:"format,omitempty"`
@@ -551,6 +553,24 @@ func (s *System) GetProjectLibraryLocations(projectToken string) ([]Library, err
 	}
 
 	return wsResponse.Libraries, nil
+}
+
+// SaveProjectTag
+func (s *System) SaveProjectTag(userKey string, projectToken string, projectTagKey string, projectTagValue string) ([]byte, error) {
+	req := Request{
+		RequestType:     "saveProjectTag",
+		UserKey:         userKey,
+		ProjectToken:    projectToken,
+		ProjectTagKey:   projectTagKey,
+		ProjectTagValue: projectTagValue,
+	}
+
+	respBody, err := s.sendRequest(req)
+	if err != nil {
+		return nil, errors.Wrap(err, "WhiteSource getProjectVulnerabilityReport request failed")
+	}
+
+	return respBody, nil
 }
 
 func (s *System) sendRequestAndDecodeJSON(req Request, result interface{}) error {

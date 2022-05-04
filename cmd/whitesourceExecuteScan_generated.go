@@ -49,6 +49,8 @@ type whitesourceExecuteScanOptions struct {
 	ProductToken                         string   `json:"productToken,omitempty"`
 	Version                              string   `json:"version,omitempty"`
 	ProjectName                          string   `json:"projectName,omitempty"`
+	ProjectTagKey                        string   `json:"projectTagKey,omitempty"`
+	ProjectTagValue                      string   `json:"projectTagValue,omitempty"`
 	ProjectToken                         string   `json:"projectToken,omitempty"`
 	Reporting                            bool     `json:"reporting,omitempty"`
 	ScanImage                            string   `json:"scanImage,omitempty"`
@@ -327,6 +329,8 @@ func addWhitesourceExecuteScanFlags(cmd *cobra.Command, stepConfig *whitesourceE
 	cmd.Flags().StringVar(&stepConfig.ProductToken, "productToken", os.Getenv("PIPER_productToken"), "Token of the WhiteSource product to be created and used for results aggregation, usually determined automatically. Can optionally be provided as an alternative to `productName`.")
 	cmd.Flags().StringVar(&stepConfig.Version, "version", os.Getenv("PIPER_version"), "Version of the WhiteSource product to be created and used for results aggregation.")
 	cmd.Flags().StringVar(&stepConfig.ProjectName, "projectName", os.Getenv("PIPER_projectName"), "The project name used for reporting results in WhiteSource. When provided, all source modules will be scanned into one aggregated WhiteSource project. For scan types `maven`, `mta`, `npm`, the default is to generate one WhiteSource project per module, whereas the project name is derived from the module's build descriptor. For NPM modules, project aggregation is not supported, the last scanned NPM module will override all previously aggregated scan results!")
+	cmd.Flags().StringVar(&stepConfig.ProjectTagKey, "projectTagKey", `key`, "List.")
+	cmd.Flags().StringVar(&stepConfig.ProjectTagValue, "projectTagValue", `value`, "List.")
 	cmd.Flags().StringVar(&stepConfig.ProjectToken, "projectToken", os.Getenv("PIPER_projectToken"), "Project token to execute scan on. Ignored for scan types `maven`, `mta` and `npm`. Used for project aggregation when scanning with the Unified Agent and can be provided as an alternative to `projectName`.")
 	cmd.Flags().BoolVar(&stepConfig.Reporting, "reporting", true, "Whether assessment is being done at all, defaults to `true`")
 	cmd.Flags().StringVar(&stepConfig.ScanImage, "scanImage", os.Getenv("PIPER_scanImage"), "For `buildTool: docker`: Defines the docker image which should be scanned.")
@@ -677,6 +681,24 @@ func whitesourceExecuteScanMetadata() config.StepData {
 						Mandatory:   false,
 						Aliases:     []config.Alias{{Name: "whitesourceProjectName"}},
 						Default:     os.Getenv("PIPER_projectName"),
+					},
+					{
+						Name:        "projectTagKey",
+						ResourceRef: []config.ResourceReference{},
+						Scope:       []string{"PARAMETERS", "STAGES", "STEPS"},
+						Type:        "string",
+						Mandatory:   false,
+						Aliases:     []config.Alias{{Name: "whitesourceProjectTagKey"}},
+						Default:     `key`,
+					},
+					{
+						Name:        "projectTagValue",
+						ResourceRef: []config.ResourceReference{},
+						Scope:       []string{"PARAMETERS", "STAGES", "STEPS"},
+						Type:        "string",
+						Mandatory:   false,
+						Aliases:     []config.Alias{{Name: "whitesourceProjectTagValue"}},
+						Default:     `value`,
 					},
 					{
 						Name:        "projectToken",

@@ -325,6 +325,26 @@ spec:
           - PARAMETERS
           - STAGES
           - STEPS
+      - name: projectTagKey
+        aliases:
+          - name: whitesourceProjectTagKey
+        type: "string"
+        description: "List."
+        scope:
+          - PARAMETERS
+          - STAGES
+          - STEPS
+        default: "key"
+      - name: projectTagValue
+        aliases:
+          - name: whitesourceProjectTagValue
+        type: "string"
+        description: "List."
+        scope:
+          - PARAMETERS
+          - STAGES
+          - STEPS
+        default: "value"
       - name: projectToken
         type: string
         description: "Project token to execute scan on. Ignored for scan types `maven`, `mta` and `npm`.
