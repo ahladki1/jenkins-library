@@ -43,6 +43,7 @@ type whitesource interface {
 	GetProjectAlerts(projectToken string) ([]ws.Alert, error)
 	GetProjectAlertsByType(projectToken, alertType string) ([]ws.Alert, error)
 	GetProjectLibraryLocations(projectToken string) ([]ws.Library, error)
+	SaveProjectTag(userKey string, projectToken string, projectTagKey string, projectTagValue string) ([]byte, error)
 }
 
 type whitesourceUtils interface {
@@ -164,6 +165,7 @@ func runWhitesourceExecuteScan(config *ScanOptions, scan *ws.Scan, utils whiteso
 			return errors.Wrapf(err, "failed to execute WhiteSource scan")
 		}
 	}
+	sys.SaveProjectTag(config.UserToken, config.ProjectToken, config.ProjectTagKey, config.ProjectTagValue)
 	return nil
 }
 
