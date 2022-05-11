@@ -556,7 +556,7 @@ func (s *System) GetProjectLibraryLocations(projectToken string) ([]Library, err
 }
 
 // SaveProjectTag
-func (s *System) SaveProjectTag(userKey string, projectToken string, projectTagKey string, projectTagValue string) ([]byte, error) {
+func (s *System) SaveProjectTag(userKey string, projectToken string, projectTagKey string, projectTagValue string) error {
 	req := Request{
 		RequestType:     "saveProjectTag",
 		UserKey:         userKey,
@@ -565,12 +565,12 @@ func (s *System) SaveProjectTag(userKey string, projectToken string, projectTagK
 		ProjectTagValue: projectTagValue,
 	}
 
-	respBody, err := s.sendRequest(req)
+	_, err := s.sendRequest(req)
 	if err != nil {
-		return nil, errors.Wrap(err, "WhiteSource getProjectVulnerabilityReport request failed")
+		return errors.Wrap(err, "WhiteSource saveProjectTag request failed")
 	}
 
-	return respBody, nil
+	return nil
 }
 
 func (s *System) sendRequestAndDecodeJSON(req Request, result interface{}) error {

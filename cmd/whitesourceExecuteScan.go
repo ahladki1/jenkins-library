@@ -43,7 +43,7 @@ type whitesource interface {
 	GetProjectAlerts(projectToken string) ([]ws.Alert, error)
 	GetProjectAlertsByType(projectToken, alertType string) ([]ws.Alert, error)
 	GetProjectLibraryLocations(projectToken string) ([]ws.Library, error)
-	SaveProjectTag(userKey string, projectToken string, projectTagKey string, projectTagValue string) ([]byte, error)
+	SaveProjectTag(userKey string, projectToken string, projectTagKey string, projectTagValue string) error
 }
 
 type whitesourceUtils interface {

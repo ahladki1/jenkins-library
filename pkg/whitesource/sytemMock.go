@@ -124,6 +124,11 @@ func (m *SystemMock) GetProjectLibraryLocations(projectToken string) ([]Library,
 	return m.Libraries, nil
 }
 
+// SaveProjectTag
+func (m *SystemMock) SaveProjectTag(userKey string, projectToken string, projectTagKey string, projectTagValue string) error {
+	return nil
+}
+
 // NewSystemMockWithProjectName returns a pointer to a new instance of SystemMock using a project with a defined name.
 func NewSystemMockWithProjectName(lastUpdateDate, projectName string) *SystemMock {
 	mockLibrary := Library{
